@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
+  correo: string = 'ejemplo@email.com';
+  contrasena: string = '';
+
   constructor() { }
 
   ngOnInit() {
