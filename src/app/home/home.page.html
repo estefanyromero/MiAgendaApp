@@ -27,11 +27,14 @@
     </ion-select>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Fecha de Nacimiento</ion-label>
-    <ion-input [(ngModel)]="fechaNacimiento" placeholder="dd/mm/aaaa"></ion-input>
-    <!-- MatDatepicker se agregará luego -->
-  </ion-item>
+    
+    <mat-form-field appearance="fill" style="width: 100%; margin-top: 16px;">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
 
   <ion-button expand="block" color="danger" (click)="limpiarCampos()">
     Limpiar
