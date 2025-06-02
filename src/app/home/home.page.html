@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title class="titulo-animado">Home</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -8,12 +9,12 @@
 
   <h2>Bienvenido, {{ nombreUsuario }}</h2>
 
-  <ion-item>
+  <ion-item [class.shake]="animarNombre">
     <ion-label position="floating">Nombre</ion-label>
     <ion-input [(ngModel)]="nombre"></ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item [class.shake]="animarApellido">
     <ion-label position="floating">Apellido</ion-label>
     <ion-input [(ngModel)]="apellido"></ion-input>
   </ion-item>
@@ -27,13 +28,13 @@
     </ion-select>
   </ion-item>
 
-    
-    <mat-form-field appearance="fill" style="width: 100%; margin-top: 16px;">
-      <mat-label>Fecha de nacimiento</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%; margin-top: 16px;">
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 
 
   <ion-button expand="block" color="danger" (click)="limpiarCampos()">

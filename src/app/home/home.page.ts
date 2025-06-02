@@ -15,8 +15,10 @@ export class HomePage implements OnInit {
   apellido: string = '';
   educacion: string = '';
   fechaNacimiento: string = '';
+  animarNombre: boolean = false;
+  animarApellido: boolean = false;
 
-  constructor(private route: ActivatedRoute, private alertCtrl: AlertController) {}
+  constructor(private route: ActivatedRoute, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -25,11 +27,22 @@ export class HomePage implements OnInit {
   }
 
   limpiarCampos() {
-    this.nombre = '';
-    this.apellido = '';
-    this.educacion = '';
-    this.fechaNacimiento = '';
-  }
+  this.nombre = '';
+  this.apellido = '';
+  this.educacion = '';
+  this.fechaNacimiento = '';
+
+  // Activar animación
+  this.animarNombre = true;
+  this.animarApellido = true;
+
+  // Desactivar animación después de 500ms
+  setTimeout(() => {
+    this.animarNombre = false;
+    this.animarApellido = false;
+  }, 500);
+}
+
 
   async mostrarDatos() {
     const alert = await this.alertCtrl.create({
