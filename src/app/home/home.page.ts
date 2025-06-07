@@ -18,7 +18,8 @@ export class HomePage implements OnInit {
   animarNombre: boolean = false;
   animarApellido: boolean = false;
 
-  constructor(private route: ActivatedRoute, private alertCtrl: AlertController) { }
+  constructor(private route: ActivatedRoute, private alertController: AlertController) {}
+
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -27,28 +28,28 @@ export class HomePage implements OnInit {
   }
 
   limpiarCampos() {
-  this.nombre = '';
-  this.apellido = '';
-  this.educacion = '';
-  this.fechaNacimiento = '';
+    this.nombre = '';
+    this.apellido = '';
+    this.educacion = '';
+    this.fechaNacimiento = '';
 
-  // Activar animación
-  this.animarNombre = true;
-  this.animarApellido = true;
+    // Activar animación
+    this.animarNombre = true;
+    this.animarApellido = true;
 
-  // Desactivar animación después de 500ms
-  setTimeout(() => {
-    this.animarNombre = false;
-    this.animarApellido = false;
-  }, 500);
-}
+    // Desactivar animación después de 500ms
+    setTimeout(() => {
+      this.animarNombre = false;
+      this.animarApellido = false;
+    }, 500);
+  }
 
 
   async mostrarDatos() {
-    const alert = await this.alertCtrl.create({
+    const alert = await this.alertController.create({
       header: 'Datos Ingresados',
       message: `Nombre: ${this.nombre}<br>Apellido: ${this.apellido}`,
-      buttons: ['OK']
+      buttons: ['Aceptar']
     });
 
     await alert.present();
