@@ -38,3 +38,7 @@
 
 /** Angular Material */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+ion-content {
+  --background: linear-gradient(to right, #ffecd2, #fcb69f);
+}

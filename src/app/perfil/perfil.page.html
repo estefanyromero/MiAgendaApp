@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="titulo-animado">Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item [class.shake]="animarNombre">
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="nombre"></ion-input>
+  </ion-item>
+
+  <ion-item [class.shake]="animarApellido">
+    <ion-label position="floating">Apellido</ion-label>
+    <ion-input [(ngModel)]="apellido"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Nivel de Educación</ion-label>
+    <ion-select [(ngModel)]="educacion">
+      <ion-select-option value="Basica">Básica</ion-select-option>
+      <ion-select-option value="Media">Media</ion-select-option>
+      <ion-select-option value="Superior">Superior</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha de nacimiento</ion-label>
+    <ion-input [(ngModel)]="fechaNacimiento" type="date"></ion-input>
+  </ion-item>
+
+  <ion-button id="btnGuardar" expand="block" color="primary" (click)="guardarDatos(); animarBoton()">
+    Guardar Datos
+  </ion-button>
+
+  <ion-button expand="block" color="medium" (click)="limpiarCampos()">
+    Limpiar
+  </ion-button>
+
+  <ion-button expand="block" color="medium" routerLink="/home">
+    ⬅️ Volver al Home
+  </ion-button>
+
+</ion-content>

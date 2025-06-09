@@ -1,48 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="titulo-animado">Home</ion-title>
-
+    <ion-title class="titulo-animado">Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <h2>Bienvenido, {{ nombreUsuario }}</h2>
+  <h2 style="text-align: center;">Hola, {{ nombreUsuario }} 👋</h2>
 
-  <ion-item [class.shake]="animarNombre">
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="nombre"></ion-input>
-  </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>¿Qué deseas hacer hoy?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" routerLink="/tareas" color="warning" @fadeIn>
+        📋 Ver Tareas
+      </ion-button>
 
-  <ion-item [class.shake]="animarApellido">
-    <ion-label position="floating">Apellido</ion-label>
-    <ion-input [(ngModel)]="apellido"></ion-input>
-  </ion-item>
+      <ion-button expand="block" routerLink="/contactos" color="secondary" @fadeIn>
+        👥 Ver Contactos
+      </ion-button>
 
-  <ion-item>
-    <ion-label>Nivel de Educación</ion-label>
-    <ion-select [(ngModel)]="educacion">
-      <ion-select-option value="Basica">Básica</ion-select-option>
-      <ion-select-option value="Media">Media</ion-select-option>
-      <ion-select-option value="Superior">Superior</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-button expand="block" routerLink="/perfil" color="medium" @fadeIn>
+        🙍‍♀️ Mi Perfil
+      </ion-button>
 
-
-  <mat-form-field appearance="fill" style="width: 100%; margin-top: 16px;">
-    <mat-label>Fecha de nacimiento</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+      <ion-button expand="block" routerLink="/calendario" color="success" @fadeIn>
+        📅 Ver Calendario
+      </ion-button>
 
 
-  <ion-button expand="block" color="danger" (click)="limpiarCampos()">
-    Limpiar
-  </ion-button>
-
-  <ion-button expand="block" color="success" (click)="mostrarDatos()">
-    Mostrar
-  </ion-button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

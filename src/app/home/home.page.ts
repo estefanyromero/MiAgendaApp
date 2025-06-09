@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { fadeSlideIn } from '../shared/animaciones';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: false,
+  animations: [fadeSlideIn],
 })
 export class HomePage implements OnInit {
 
@@ -18,7 +20,7 @@ export class HomePage implements OnInit {
   animarNombre: boolean = false;
   animarApellido: boolean = false;
 
-  constructor(private route: ActivatedRoute, private alertController: AlertController) {}
+  constructor(private route: ActivatedRoute, private alertController: AlertController) { }
 
 
   ngOnInit() {
