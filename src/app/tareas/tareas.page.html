@@ -1,28 +1,66 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title @fadeSlideIn>Tareas</ion-title>
+    <ion-title class="titulo-animado">📝 Mis Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <ion-item>
-    <ion-label position="floating">Nueva tarea</ion-label>
-    <ion-input [(ngModel)]="nuevaTarea"></ion-input>
-  </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Agregar nueva tarea</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
 
-  <ion-button expand="block" color="secondary" (click)="agregarTarea()">
-    Agregar Tarea
-  </ion-button>
+      <ion-item>
+        <ion-label position="floating">Nueva tarea</ion-label>
+        <ion-input [(ngModel)]="nuevaTarea"></ion-input>
+      </ion-item>
 
-  <ion-list>
-    <ion-item *ngFor="let tarea of listaTareas; let i = index">
-      {{ tarea }}
-      <ion-button slot="end" color="danger" fill="clear" (click)="eliminarTarea(i)">
-        <ion-icon name="trash-outline"></ion-icon>
+      <ion-item>
+        <ion-label>Categoría</ion-label>
+        <ion-select [(ngModel)]="nuevaCategoria" placeholder="Selecciona categoría">
+          <ion-select-option value="estudio">📚 Estudio</ion-select-option>
+          <ion-select-option value="trabajo">💼 Trabajo</ion-select-option>
+          <ion-select-option value="personal">🏠 Personal</ion-select-option>
+          <ion-select-option value="compras">🛍️ Compras</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" color="success" (click)="agregarTarea()">
+        ➕ Agregar Tarea
       </ion-button>
-    </ion-item>
-  </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="tareas-card" *ngIf="listaTareas.length > 0">
+    <ion-card-header>
+      <ion-card-title>Lista de tareas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let tarea of listaTareas; let i = index">
+          <ion-label>
+            <h2>{{ tarea.texto }}</h2>
+            <p class="fecha-tarea">📅 {{ tarea.fecha }}</p>
+            <span>{{ getIconoCategoria(tarea.categoria) }} {{ tarea.categoria | titlecase }}</span>
+          </ion-label>
+
+          <ion-button slot="end" color="danger" fill="clear" (click)="eliminarTarea(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="listaTareas.length === 0">
+    <ion-card-content class="ion-text-center">
+      <p>📭 No tienes tareas por ahora. ¡Relájate!</p>
+    </ion-card-content>
+  </ion-card>
+
   <ion-button expand="block" color="medium" routerLink="/home">
     ⬅️ Volver al Home
   </ion-button>

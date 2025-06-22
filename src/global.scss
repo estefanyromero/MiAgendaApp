@@ -18,27 +18,66 @@
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Optional CSS utils that can be comented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+/* Ionic Dark Mode Support */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-/** Angular Material */
+/* Angular Material Theme */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* ------------------------------------------------------------------------ */
+/* ESTILOS GLOBALES PERSONALIZADOS */
+/* ------------------------------------------------------------------------ */
+
+/* Fondo general para toda la app */
 ion-content {
-  --background: linear-gradient(to right, #ffecd2, #fcb69f);
+  --background: linear-gradient(to right, #ffecd2, #fcb69f); /* fondo naranja claro */
+}
+
+/* Estilo para los campos de entrada */
+ion-item {
+  margin: 10px 16px;
+  border-radius: 10px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+ion-button {
+  margin: 10px 16px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* Animación de sacudida para campos de entrada */
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-5px); }
+  50%  { transform: translateX(5px); }
+  75%  { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.5s ease;
+}
+
+/* Animación para títulos */
+@keyframes fadeInSlide {
+  0%   { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.titulo-animado {
+  animation: fadeInSlide 0.8s ease-out;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
 }

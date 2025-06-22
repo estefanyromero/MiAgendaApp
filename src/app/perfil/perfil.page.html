@@ -5,6 +5,18 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <mat-card class="perfil-card" style="margin-bottom: 20px;"> 
+    <mat-card-title>Resumen de Usuario</mat-card-title>
+    <mat-card-content>
+      <p><strong>Nombre:</strong> {{ nombre || 'No ingresado' }}</p>
+      <p><strong>Apellido:</strong> {{ apellido || 'No ingresado' }}</p>
+      <p><strong>Educación:</strong>
+  <mat-chip color="accent" selected *ngIf="educacion">{{ educacion }}</mat-chip>
+  <span *ngIf="!educacion">No seleccionada</span>
+</p>
+      <p><strong>Fecha de nacimiento:</strong> {{ fechaNacimiento || 'No indicada' }}</p>
+    </mat-card-content>
+  </mat-card>
 
   <ion-item [class.shake]="animarNombre">
     <ion-label position="floating">Nombre</ion-label>
