@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { fadeSlideIn } from '../shared/animaciones';
+import { Storage } from '@ionic/storage-angular'; 
 
 @Component({
   selector: 'app-home',
@@ -19,14 +20,31 @@ export class HomePage implements OnInit {
   fechaNacimiento: string = '';
   animarNombre: boolean = false;
   animarApellido: boolean = false;
+  private _storage: Storage | null = null;
 
-  constructor(private route: ActivatedRoute, private alertController: AlertController) { }
+  constructor(
+    private route: ActivatedRoute,
+    private alertController: AlertController,
+    private storage: Storage // ⬅️ nuevo
+  ) {}
 
+  async ngOnInit() {
+    await this.initStorage();
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.nombreUsuario = params['usuario'] || '';
+    // Ver si viene desde login
+    this.route.queryParams.subscribe(async params => {
+      if (params['usuario']) {
+        this.nombreUsuario = params['usuario'];
+        await this._storage?.set('usuario', this.nombreUsuario); // guarda
+      } else {
+        const guardado = await this._storage?.get('usuario');
+        this.nombreUsuario = guardado ?? '';
+      }
     });
+  }
+
+  async initStorage() {
+    this._storage = await this.storage.create();
   }
 
   limpiarCampos() {
@@ -34,18 +52,14 @@ export class HomePage implements OnInit {
     this.apellido = '';
     this.educacion = '';
     this.fechaNacimiento = '';
-
-    // Activar animación
     this.animarNombre = true;
     this.animarApellido = true;
 
-    // Desactivar animación después de 500ms
     setTimeout(() => {
       this.animarNombre = false;
       this.animarApellido = false;
     }, 500);
   }
-
 
   async mostrarDatos() {
     const alert = await this.alertController.create({
@@ -57,4 +71,3 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 }
-
