@@ -34,6 +34,28 @@
         📅 Ver Calendario
       </ion-button>
     </ion-card-content>
-  </ion-card>
+    <ion-button expand="block" routerLink="/mapa" color="tertiary">
+      📍 Ver Mapa
+    </ion-button>
 
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Usuarios desde la API</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let user of usuariosAPI">
+          <ion-label>
+            <h2>{{ user.name }}</h2>
+            <p>{{ user.email }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-button expand="block" color="danger" (click)="cerrarSesion()">
+  🔒 Cerrar Sesión
+</ion-button>

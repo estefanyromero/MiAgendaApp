@@ -54,4 +54,11 @@ export class DatabaseService {
     const result = await this.db.query(query, [usuario, clave]);
     return result.values?.[0] || null;
   }
+
+  async obtenerUsuarioPorNombre(usuario: string): Promise<any> {
+    if (!this.db) return null;
+    const query = 'SELECT * FROM usuarios WHERE usuario = ?';
+    const result = await this.db.query(query, [usuario]);
+    return result.values?.[0] || null;
+  }
 }

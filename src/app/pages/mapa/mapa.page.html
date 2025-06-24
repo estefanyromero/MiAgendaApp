@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Ubicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div style="text-align: center;">
+    <h2>Ubicación actual:</h2>
+    <p><strong>Latitud:</strong> {{ latitud }}</p>
+    <p><strong>Longitud:</strong> {{ longitud }}</p>
+
+    <ion-button expand="block" color="primary" (click)="actualizarUbicacion()" class="boton-animado">
+      🔄 Actualizar Ubicación
+    </ion-button>
+  </div>
+  <iframe *ngIf="urlMapa" width="100%" height="300" frameborder="0" style="border:0" [src]="urlMapa"
+    class="mapa-animado" allowfullscreen>
+  </iframe>
+
+  <ion-button expand="block" color="medium" routerLink="/home">
+    🏠 Volver al Home
+  </ion-button>
+</ion-content>

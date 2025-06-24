@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { fadeSlideIn } from '../shared/animaciones';
-import { Storage } from '@ionic/storage-angular'; 
+import { Storage } from '@ionic/storage-angular';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -20,25 +21,38 @@ export class HomePage implements OnInit {
   fechaNacimiento: string = '';
   animarNombre: boolean = false;
   animarApellido: boolean = false;
+  usuariosAPI: any[] = [];  // Lista de usuarios desde la API
+
   private _storage: Storage | null = null;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private alertController: AlertController,
-    private storage: Storage // ⬅️ nuevo
+    private storage: Storage,
+    private apiService: ApiService // Servicio API
   ) {}
 
   async ngOnInit() {
     await this.initStorage();
 
-    // Ver si viene desde login
     this.route.queryParams.subscribe(async params => {
       if (params['usuario']) {
         this.nombreUsuario = params['usuario'];
-        await this._storage?.set('usuario', this.nombreUsuario); // guarda
+        await this._storage?.set('usuario', this.nombreUsuario);
       } else {
         const guardado = await this._storage?.get('usuario');
         this.nombreUsuario = guardado ?? '';
+      }
+    });
+
+    // Consumir usuarios desde API externa
+    this.apiService.getUsuarios().subscribe({
+      next: (data) => {
+        this.usuariosAPI = data;
+      },
+      error: (error) => {
+        console.error('Error al obtener usuarios desde API:', error);
       }
     });
   }
@@ -67,7 +81,12 @@ export class HomePage implements OnInit {
       message: `Nombre: ${this.nombre}<br>Apellido: ${this.apellido}`,
       buttons: ['Aceptar']
     });
-
     await alert.present();
+  }
+
+  async cerrarSesion() {
+    await this._storage?.remove('usuario');
+    localStorage.removeItem('usuario');   
+    this.router.navigate(['/login']);
   }
 }

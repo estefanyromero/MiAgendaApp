@@ -3,7 +3,6 @@ import { AlertController } from '@ionic/angular';
 import { fadeSlideIn } from '../shared/animaciones';
 import { createAnimation } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -19,27 +18,26 @@ export class PerfilPage implements OnInit {
   animarNombre: boolean = false;
   animarApellido: boolean = false;
 
-  constructor(private alertController: AlertController) {}
+  constructor(private alertController: AlertController) { }
 
-animarBoton() {
-  const btn = document.querySelector('#btnGuardar');
-  if (!btn) return; 
+  animarBoton() {
+    const btn = document.querySelector('#btnGuardar');
+    if (!btn) return;
 
-  const animation = createAnimation()
-    .addElement(btn)
-    .duration(500)
-    .iterations(1)
-    .keyframes([
-      { offset: 0, transform: 'scale(1)', opacity: '1' },
-      { offset: 0.5, transform: 'scale(1.1)', opacity: '0.8' },
-      { offset: 1, transform: 'scale(1)', opacity: '1' }
-    ]);
+    const animation = createAnimation()
+      .addElement(btn)
+      .duration(500)
+      .iterations(1)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)', opacity: '1' },
+        { offset: 0.5, transform: 'scale(1.1)', opacity: '0.8' },
+        { offset: 1, transform: 'scale(1)', opacity: '1' }
+      ]);
 
-  animation.play();
-}
+    animation.play();
+  }
 
   ngOnInit() {
-    // Recuperar datos si existen en localStorage
     const datosGuardados = localStorage.getItem('perfilDatos');
     if (datosGuardados) {
       const datos = JSON.parse(datosGuardados);
@@ -65,7 +63,7 @@ animarBoton() {
     }, 500);
   }
 
-async guardarDatos() {
+  async guardarDatos() {
     const datos = {
       nombre: this.nombre,
       apellido: this.apellido,
@@ -82,4 +80,10 @@ async guardarDatos() {
 
     await alert.present();
   }
+
+  ultimaExperiencia: any = null;
+  mostrarExperiencia(event: any) {
+    this.ultimaExperiencia = event;
+  }
+
 }

@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { ComponentsModule } from '../components/components/components.module';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatInputModule,
     MatNativeDateModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    ComponentsModule
   ],
   declarations: [PerfilPage]
 })

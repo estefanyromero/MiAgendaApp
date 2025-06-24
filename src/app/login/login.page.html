@@ -25,14 +25,19 @@
           pattern="[0-9]*"></ion-input>
       </ion-item>
 
+      <!-- Botón de ingresar -->
       <ion-button expand="block" color="primary" (click)="ingresar()">
-        Agregar
+        Ingresar
       </ion-button>
 
       <!-- Enlace alternativo -->
       <ion-button fill="clear" size="small" color="medium">
-
         ¿Olvidaste tu contraseña?
+      </ion-button>
+
+      <!-- Botón para ir al registro -->
+      <ion-button fill="clear" size="small" color="medium" routerLink="/registro">
+        ¿No tienes cuenta? Crea una aquí
       </ion-button>
 
       <!-- Íconos de redes sociales -->

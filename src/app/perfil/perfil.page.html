@@ -5,44 +5,77 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <mat-card class="perfil-card" style="margin-bottom: 20px;"> 
-    <mat-card-title>Resumen de Usuario</mat-card-title>
-    <mat-card-content>
+
+  <!-- 🧠 Sección 1: Registro de Experiencia -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registrar Experiencia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Componente que contiene el formulario -->
+      <app-form-experiencia (experienciaRegistrada)="mostrarExperiencia($event)"></app-form-experiencia>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 📋 Mostrar la última experiencia registrada -->
+  <ion-card *ngIf="ultimaExperiencia">
+    <ion-card-header>
+      <ion-card-title>Última Experiencia Registrada</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Nombre:</strong> {{ ultimaExperiencia.nombre }}</p>
+      <p><strong>Descripción:</strong> {{ ultimaExperiencia.descripcion }}</p>
+      <p><strong>Fecha:</strong> {{ ultimaExperiencia.fecha }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 👤 Sección 2: Información Personal -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información Personal</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input [(ngModel)]="apellido"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nivel de Educación</ion-label>
+        <ion-select [(ngModel)]="educacion">
+          <ion-select-option value="Basica">Básica</ion-select-option>
+          <ion-select-option value="Media">Media</ion-select-option>
+          <ion-select-option value="Superior">Superior</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de nacimiento</ion-label>
+        <ion-input [(ngModel)]="fechaNacimiento" type="date"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 📊 Sección 3: Resumen -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Resumen de Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
       <p><strong>Nombre:</strong> {{ nombre || 'No ingresado' }}</p>
       <p><strong>Apellido:</strong> {{ apellido || 'No ingresado' }}</p>
-      <p><strong>Educación:</strong>
-  <mat-chip color="accent" selected *ngIf="educacion">{{ educacion }}</mat-chip>
-  <span *ngIf="!educacion">No seleccionada</span>
-</p>
+      <p><strong>Educación:</strong> {{ educacion || 'No seleccionada' }}</p>
       <p><strong>Fecha de nacimiento:</strong> {{ fechaNacimiento || 'No indicada' }}</p>
-    </mat-card-content>
-  </mat-card>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-item [class.shake]="animarNombre">
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="nombre"></ion-input>
-  </ion-item>
-
-  <ion-item [class.shake]="animarApellido">
-    <ion-label position="floating">Apellido</ion-label>
-    <ion-input [(ngModel)]="apellido"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Nivel de Educación</ion-label>
-    <ion-select [(ngModel)]="educacion">
-      <ion-select-option value="Basica">Básica</ion-select-option>
-      <ion-select-option value="Media">Media</ion-select-option>
-      <ion-select-option value="Superior">Superior</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="stacked">Fecha de nacimiento</ion-label>
-    <ion-input [(ngModel)]="fechaNacimiento" type="date"></ion-input>
-  </ion-item>
-
-  <ion-button id="btnGuardar" expand="block" color="primary" (click)="guardarDatos(); animarBoton()">
+  <!-- 🔘 Botones -->
+  <ion-button expand="block" color="primary" (click)="guardarDatos(); animarBoton()">
     Guardar Datos
   </ion-button>
 
@@ -50,7 +83,7 @@
     Limpiar
   </ion-button>
 
-  <ion-button expand="block" color="medium" routerLink="/home">
+  <ion-button expand="block" color="light" routerLink="/home">
     ⬅️ Volver al Home
   </ion-button>
 
